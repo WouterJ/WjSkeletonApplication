@@ -1,0 +1,7 @@
+modules:
+    - Application
+    - Wj\Framework
+
+module_listener_options:
+    config_glob_paths: [ 'app/autoload/{,*.}{global,local}.php' ]
+    module_paths: [ './src', './vendor' ]

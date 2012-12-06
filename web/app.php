@@ -8,5 +8,8 @@ chdir(dirname(__DIR__));
 // Setup autoloading
 require 'app/init_autoloader.php';
 
+$locator = new Wj\Framework\Config\ConfigLocator();
+$config = $locator->locate('app/config/config');
+
 // Run the application!
-Zend\Mvc\Application::init(require 'app/config/application.config.php')->run();
+Zend\Mvc\Application::init($config)->run();
