@@ -1,5 +1,5 @@
 modules:
-    - Application
+    - Acme\Application
     - Wj\Framework
 
 module_listener_options:

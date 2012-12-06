@@ -7,12 +7,15 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Application;
+namespace Acme\Application;
+
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
-class Module
+use Wj\Framework\Module\AbstractModule;
+
+class Module extends AbstractModule
 {
     public function onBootstrap(MvcEvent $e)
     {
@@ -22,19 +25,8 @@ class Module
         $moduleRouteListener->attach($eventManager);
     }
 
-    public function getConfig()
+    public function getConfigFile()
     {
-        return include __DIR__ . '/config/module.config.php';
-    }
-
-    public function getAutoloaderConfig()
-    {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
+        return __DIR__ . '/config/module.config';
     }
 }
