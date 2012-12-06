@@ -6,7 +6,7 @@
 chdir(dirname(__DIR__));
 
 // Setup autoloading
-require 'init_autoloader.php';
+require 'app/init_autoloader.php';
 
 // Run the application!
 Zend\Mvc\Application::init(require 'app/config/application.config.php')->run();
