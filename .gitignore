@@ -7,3 +7,6 @@ nbproject
 .project
 .settings
 composer.lock
+vendor/
+*~
+*.swp
