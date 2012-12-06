@@ -8,7 +8,7 @@ return array(
             'app/autoload/{,*.}{global,local}.php',
         ),
         'module_paths' => array(
-            './module',
+            './src',
             './vendor',
         ),
     ),
