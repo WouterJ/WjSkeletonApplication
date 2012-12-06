@@ -9,7 +9,8 @@
     "homepage": "http://framework.zend.com/",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": "2.*"
+        "zendframework/zendframework": "2.*",
+        "symfony/yaml": "2.1.x"
     },
     "autoload": {
         "psr-0": {
