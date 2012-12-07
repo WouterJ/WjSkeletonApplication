@@ -25,8 +25,8 @@ class Module extends AbstractModule
         $moduleRouteListener->attach($eventManager);
     }
 
-    public function getConfigFile()
+    public function getConfig()
     {
-        return __DIR__ . '/config/module.config';
+        return $this->getConfigLocator()->locate(__DIR__ . '/config/module.config');
     }
 }
