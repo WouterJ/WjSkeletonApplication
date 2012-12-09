@@ -5,26 +5,44 @@ namespace Wj\Framework;
 
 use Zend\Mvc\MvcEvent;
 
+use Zend\EventManager\StaticEventManager;
+
+use Zend\ModuleManager\Feature\ServiceProviderInterface;
+
+use Wj\Framework\Config\ConfigEvents;
 use Wj\Framework\Config\ConfigLocator;
+use Wj\Framework\Config\Resolver\ModuleNameResolver;
+
+use Wj\Framework\DependencyInjection\ServiceConfiguration;
+
 use Wj\Framework\View\Http\InjectTemplateListener;
 
 
-class Module
+class Module implements ServiceProviderInterface
 {
     public function onBootstrap($e)
     {
         $application = $e->getApplication();
         $serviceManager = $application->getServiceManager();
  
-        $this->initModules($serviceManager);
+        $this->initDispatcher($serviceManager);
     }
 
-    public function initModules($serviceManager)
+    public function initDispatcher($serviceManager)
     {
-        $eventManager = $serviceManager->get('Application')->getEventManager();
-        $sharedEvents = $eventManager->getSharedManager();
+        $sharedEvents = $serviceManager->get('SharedEventManager');
  
         $injectTemplateListener = new InjectTemplateListener();
         $sharedEvents->attach('Zend\Stdlib\DispatchableInterface', MvcEvent::EVENT_DISPATCH, array($injectTemplateListener, 'injectTemplate'), -81);
+    }
+
+    public function getConfig()
+    {
+        return array();
+    }
+
+    public function getServiceConfig()
+    {
+        return new ServiceConfiguration();
     }
 }

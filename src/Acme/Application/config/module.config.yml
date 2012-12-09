@@ -51,8 +51,8 @@ view_manager:
     not_found_template: error/404
     exception_template: error/index
     template_map:
-        layout/layout: './src/Acme/Application/view/layout/layout.phtml'
-        application/index/index: './src/Acme/Application/view/application/index/index.phtml'
-        error/404: './src/Acme/Application/view/error/404.phtml'
-        error/index: './src/Acme/Application/view/error/index.phtml'
-    template_path_stack: [ './src/Acme/Application/view' ]
+        layout/layout: @AcmeApplication/view/layout/layout.phtml
+        application/index/index: @AcmeApplication/view/application/index/index.phtml
+        error/404: @AcmeApplication/view/error/404.phtml
+        error/index: @AcmeApplication/view/error/index.phtml
+    template_path_stack: [ @AcmeApplication/view ]
