@@ -10,6 +10,8 @@ use Zend\Mvc\View\Http\InjectTemplateListener as ZendInjectTemplateListener;
 
 class InjectTemplateListener extends ZendInjectTemplateListener
 {
+    private $isVendor = false;
+
     public function injectTemplate(MvcEvent $e)
     {
         $routeMatch = $e->getRouteMatch();
@@ -20,12 +22,24 @@ class InjectTemplateListener extends ZendInjectTemplateListener
         if (!$controller) {
             $controller = $routeMatch->getParam('controller', '');
         }
+        $moduleNamespace = substr($controller, 0, strpos($controller, '\Controller'));
+        $module = $moduleNamespace.'\Module';
+
+        if (class_exists($module)) {
+            $moduleReflection = new \ReflectionClass($module);
+            if ($moduleReflection->isSubclassOf('Wj\Framework\Module\AbstractModule')) {
+                $this->isVendor = true;
+            }
+        }
 
         parent::injectTemplate($e);
     }
 
     protected function deriveModuleNamespace($controller)
     {
+        if (!$this->isVendor) {
+            return parent::deriveModuleNamespace($controller);
+        }
         return '';
     }
 }
